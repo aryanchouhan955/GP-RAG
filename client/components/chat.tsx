@@ -117,21 +117,21 @@ const ChatComponent: React.FC = () => {
                     return newMsgs;
                   });
                 }
-              } catch (e) {
+              } catch {
                 // Ignore incomplete JSON chunks (though our server sends complete JSON per line)
               }
             }
           }
         }
       }
-    } catch (err: any) {
-      if (err.name === 'AbortError') {
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') {
         console.log('Stream aborted');
       } else {
         console.error(err);
         setMessages((prev) => [
           ...prev,
-          { role: 'assistant', content: `**Error:** ${err.message}` },
+          { role: 'assistant', content: `**Error:** ${err instanceof Error ? err.message : String(err)}` },
         ]);
       }
     } finally {
