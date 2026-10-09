@@ -7,8 +7,10 @@ services:
     rootDir: server_python
     buildCommand: pip install -r requirements.txt
     # This command starts the worker in the background (&) and the API in the foreground
-    startCommand: python worker.py & uvicorn main:app --host 0.0.0.0 --port $PORT
+    startCommand: python worker.py & python -m uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
+      - key: PYTHONPATH
+        value: .
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: GEMINI_API_KEY
