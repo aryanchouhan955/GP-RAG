@@ -1,8 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useUser } from '@clerk/nextjs';
-import { Upload, Loader2, CheckCircle2, AlertCircle, Clock, FileText, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Upload, Loader2, CheckCircle2, AlertCircle, Clock, FileText } from 'lucide-react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const POLL_INTERVAL_MS = 3000;
@@ -36,7 +35,6 @@ const FileUploadComponent: React.FC = () => {
   const { user } = useUser();
   const [status, setStatus] = React.useState<ProcessingStatus>('idle');
   const [fileName, setFileName] = React.useState<string | null>(null);
-  const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
   const [uploadedDocs, setUploadedDocs] = React.useState<UploadedDoc[]>([]);
   const [dragging, setDragging] = React.useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -79,7 +77,6 @@ const FileUploadComponent: React.FC = () => {
   const uploadFile = async (file: File) => {
     setStatus('uploading');
     setFileName(file.name);
-    setErrorMsg(null);
 
     const formData = new FormData();
     formData.append('pdf', file);
@@ -114,7 +111,6 @@ const FileUploadComponent: React.FC = () => {
     } catch (err) {
       console.error('Upload failed', err);
       setStatus('failed');
-      setErrorMsg(err instanceof Error ? err.message : 'Upload failed');
     } finally {
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
