@@ -18,7 +18,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'GP-RAG | Chat with your PDFs',
-  description: 'Upload any PDF and ask questions about it using AI. Powered by Google Gemini and Qdrant vector search.',
+  description:
+    'Upload any PDF and ask questions about it using AI. Powered by Google Gemini and Qdrant vector search.',
 };
 
 export default async function RootLayout({
@@ -31,12 +32,10 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >

@@ -1,9 +1,10 @@
 fastapi
-uvicorn
+uvicorn[standard]
 python-multipart
-rq
+rq>=1.16.0
 redis
 langchain
+langchain-text-splitters
 langchain-community
 langchain-google-genai
 langchain-qdrant
@@ -12,3 +13,4 @@ pypdf
 sse-starlette
 python-dotenv
 pymongo
+dnspython

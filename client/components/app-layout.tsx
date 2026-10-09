@@ -8,10 +8,10 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   return (
-    <div className="flex h-screen w-full bg-background text-foreground overflow-hidden">
+    <div className="flex h-screen w-full bg-background text-foreground overflow-hidden bg-mesh">
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       <div className="flex flex-1 flex-col overflow-hidden">
-        <Header onMenuToggle={() => setIsSidebarOpen(true)} />
+        <Header onMenuToggle={() => setIsSidebarOpen((prev) => !prev)} />
         <main className="flex-1 overflow-hidden">
           {children}
         </main>
